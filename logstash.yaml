@@ -1,0 +1,58 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: logstash-fb-svc
+  labels:
+    app: logstash-fb-svc
+spec:
+  selector:
+    app: logstash-fb
+  ports:
+    - protocol: TCP
+      port: 9600
+      targetPort: lfb-port
+      name: lfb-port
+    - protocol: TCP
+      port: 5044
+      targetPort: lfb-port2
+      name: lfb-port2
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: logstash-fb-deployment
+spec:
+  template:
+    metadata:
+      labels:
+        app: logstash-fb
+    spec:
+      containers:
+        - name: logstash-fb-deployment
+          image: logstash:7.4.2
+          ports:
+            - name: lfb-port
+              containerPort: 9600
+            - name: lfb-port2
+              containerPort: 5044
+          volumeMounts:
+            - name: logstash-config-yml
+              mountPath: /usr/share/logstash/config/logstash.yml
+              subPath: logstash.yml
+            - name: logstash-conf
+              mountPath: /usr/share/logstash/pipeline/logstash.conf
+              subPath: logstash.conf
+      volumes:
+        - name: logstash-config-yml
+          configMap:
+            name: elk-fb-configmap
+            items:
+              - key: logstash.yml
+                path: logstash.yml
+        - name: logstash-conf
+          configMap:
+            name: elk-fb-configmap
+            items:
+              - key: logstash.conf
+                path: logstash.conf

@@ -1,0 +1,113 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elk-fb-configmap
+  labels:
+    name: elk-fb-configmap
+data:
+  logstash.yml: |
+    config.reload.automatic: true
+  pipelines.yml: |
+    - pipeline.id: main
+      path.config: "/usr/share/logstash/pipeline/logstash.conf"
+  logstash.conf: |
+    input {
+      beats {
+        port => 5044
+        host => "0.0.0.0"
+      }
+    }
+    filter {
+      if [event][module] == "nginx" {
+        if [fileset][name] == "access" {
+          grok {
+            match => { "message" => ["%{IPORHOST:[nginx][access][remote_ip]} - %{DATA:[nginx][access][user_name]} \[%{HTTPDATE:[nginx][access][time]}\] \"%{WORD:[nginx][access][method]} %{DATA:[nginx][access][url]} HTTP/%{NUMBER:[nginx][access][http_version]}\" %{NUMBER:[nginx][access][response_code]} %{NUMBER:[nginx][access][body_sent][bytes]} \"%{DATA:[nginx][access][referrer]}\" \"%{DATA:[nginx][access][agent]}\""] }
+            remove_field => "message"
+          }
+          mutate {
+            add_field => { "read_timestamp" => "%{@timestamp}" }
+          }
+          date {
+            match => [ "[nginx][access][time]", "dd/MMM/YYYY:H:m:s Z" ]
+            remove_field => "[nginx][access][time]"
+          }
+          useragent {
+            source => "[nginx][access][agent]"
+            target => "[nginx][access][user_agent]"
+            remove_field => "[nginx][access][agent]"
+          }
+          geoip {
+            source => "[nginx][access][remote_ip]"
+            target => "[nginx][access][geoip]"
+          }
+        }
+        else if [fileset][name] == "error" {
+          grok {
+            match => { "message" => ["%{DATA:[nginx][error][time]} \[%{DATA:[nginx][error][level]}\] %{NUMBER:[nginx][error][pid]}#%{NUMBER:[nginx][error][tid]}: (\*%{NUMBER:[nginx][error][connection_id]} )?%{GREEDYDATA:[nginx][error][message]}"] }
+            remove_field => "message"
+          }
+          mutate {
+            rename => { "@timestamp" => "read_timestamp" }
+          }
+          date {
+            match => [ "[nginx][error][time]", "YYYY/MM/dd H:m:s" ]
+            remove_field => "[nginx][error][time]"
+          }
+        }
+      }
+    }
+    output {
+      elasticsearch {
+        hosts => ["elasticsearch-fb-svc:9200"]
+        manage_template => false
+        index => "%{[@metadata][beat]}-%{[@metadata][version]}-%{+YYYY.MM.dd}"
+      }
+    stdout{}
+    } 
+  kibana.yml: |
+    server.name: "kibana-fb"
+    server.host: "0"
+    elasticsearch.hosts: [ "http://elasticsearch-fb-svc:9200" ]
+    xpack.monitoring.ui.container.elasticsearch.enabled: true
+  elasticsearch.yml: |
+    cluster.name: es-fb-cluster
+    network.host: "0.0.0.0"
+    discovery.zen.ping.unicast.hosts: elasticsearch-sts-governor
+    discovery.zen.minimum_master_nodes: 1
+    action.auto_create_index: -rep_*,+*
+    bootstrap.memory_lock: true
+    discovery.type: single-node
+    node.name: "es-fb-node-1"
+    path.data: "/usr/share/elasticsearch/data"
+  ES_JAVA_OPTS: -Xms3000m -Xmx3000m
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-configmap
+  labels:
+    name: filebeat-configmap
+data:
+  filebeat.yml: |
+    # — — — — — — — — — — Logstash output — — — — — — — — — —
+    output:
+      logstash:
+        hosts: ["logstash-fb-svc:5044"]
+    filebeat.config.modules:
+      enabled: true
+      path: /usr/share/filebeat/modules.d/*.yml #${path.config}/modules.d/*.yml
+  logstash.yml: |
+    - module: logstash
+      log:
+        enabled: true
+      slowlog:
+        enabled: true
+  nginx.yml: |
+    - module: nginx
+      access:
+        enabled: true
+        var.paths: ["/mnt/log/access.log*"]
+      error:
+        enabled: true
+        var.paths: ["/mnt/log/error.log*"]

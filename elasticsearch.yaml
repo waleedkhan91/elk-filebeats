@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-fb-svc
+  labels:
+    app: elasticsearch-fb-svc
+spec:
+  selector:
+    app: elasticsearch
+  ports:
+    - port: 9200
+      nodePort: 30098
+  type: NodePort
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-fb-sts-governor
+spec:
+  clusterIP: None
+  selector:
+    app: elasticsearch
+  ports:
+    - port: 9300
+
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: elasticsearch-fb-sts
+spec:
+  serviceName: elasticsearch-fb-sts-governor
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      securityContext:
+        fsGroup: 1000
+      initContainers:
+        - name: init-sysctl
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+          command: ["sysctl", "-w", "vm.max_map_count=262144"]
+      containers:
+        - name: elasticsearch
+          image: elasticsearch:7.4.2
+          resources:
+            requests:
+              memory: 1Gi
+          securityContext:
+            privileged: true
+            runAsUser: 1000
+            capabilities:
+              add:
+                - IPC_LOCK
+                - SYS_RESOURCE
+          env:
+            - name: ES_JAVA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  name: elk-fb-configmap
+                  key: ES_JAVA_OPTS
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /_cluster/health?local=true
+              port: 9200
+            initialDelaySeconds: 5
+          ports:
+            - containerPort: 9200
+              name: es-http
+            - containerPort: 9300
+              name: es-transport
+          volumeMounts:
+            - name: elasticsearch-yml
+              mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+              subPath: elasticsearch.yml
+      volumes:
+        - name: elasticsearch-yml
+          configMap:
+            name: elk-fb-configmap
+            items:
+              - key: elasticsearch.yml
+                path: elasticsearch.yml

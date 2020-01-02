@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-fb-svc
+  labels:
+    app: kibana-fb-svc
+spec:
+  selector:
+    app: kibana-fb
+  type: NodePort
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: kibana-fb-http
+      nodePort: 30097
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kibana-fb-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kibana-fb
+    spec:
+      containers:
+        - name: kibana-fb
+          image: kibana:7.4.2
+          ports:
+            - name: kibana-fb-http
+              containerPort: 5601
+          volumeMounts:
+            - name: kibana-yml
+              mountPath: /usr/share/kibana/config
+      volumes:
+        -  name: kibana-yml
+           configMap:
+             name: elk-fb-configmap
+             items:
+               - key: kibana.yml
+                 path: kibana.yml

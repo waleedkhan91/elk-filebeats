@@ -1,0 +1,77 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: filebeats-svc
+  labels:
+    app: filebeats-svc
+spec:
+  selector:
+    app: filebeats
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filebeats-deployment
+  labels:
+    app: filebeats-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filebeats
+  template:
+    metadata:
+      labels:
+        app: filebeats
+    spec:
+      containers:
+      - name: filebeats
+        image: elastic/filebeat:7.4.2
+        args: [
+          "--strict.perms=false",
+          "-e",
+        ]
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /mnt/log
+          name: logs-volume
+        - name: logstash-yml
+          mountPath: /usr/share/filebeat/modules.d/logstash.yml
+          subPath: logstash.yml
+        - name: nginx-yml
+          mountPath: /usr/share/filebeat/modules.d/nginx.yml
+          subPath: nginx.yml
+        - name: filebeats-yml
+          mountPath: /usr/share/filebeat/filebeat.yml
+          subPath: filebeat.yml
+      nodeSelector:
+        test: filebeats
+      volumes:
+      - name: logs-volume
+        hostPath:
+          path: /pod-data/nginx/logs
+          type: Directory
+      - name: logstash-yml
+        configMap:
+          name: filebeat-configmap
+          items:
+          - key: logstash.yml
+            path: logstash.yml
+      - name: nginx-yml
+        configMap:
+          name: filebeat-configmap
+          items:
+          - key: nginx.yml
+            path: nginx.yml
+      - name: filebeats-yml
+        configMap:
+          name: filebeat-configmap
+          items:
+          - key: filebeat.yml
+            path: filebeat.yml
+
