@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/logs:/var/log/nginx/
+    ports:
+      - "8080:80"
+    networks:
+      - elk
+  filebeat:
+    build: ./filebeat
+    entrypoint: "filebeat -e -strict.perms=false"
+    volumes:
+      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./nginx/logs:/var/log/nginx
+    networks:
+      - elk
+networks:
+  elk:
+    driver: bridge
