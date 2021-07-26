@@ -1,2 +1,214 @@
 2020/07/04 17:00:29 [error] 28#28: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "192.168.100.8:8080", referrer: "http://192.168.100.8:8080/"
 2020/07/10 15:37:20 [error] 21#21: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2021/07/26 07:55:12 [notice] 1#1: using the "epoll" event method
+2021/07/26 07:55:12 [notice] 1#1: nginx/1.21.1
+2021/07/26 07:55:12 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2021/07/26 07:55:12 [notice] 1#1: OS: Linux 4.18.0-240.10.1.el8_3.x86_64
+2021/07/26 07:55:12 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/26 07:55:12 [notice] 1#1: start worker processes
+2021/07/26 07:55:12 [notice] 1#1: start worker process 31
+2021/07/26 07:55:12 [notice] 1#1: start worker process 32
+2021/07/26 08:17:18 [error] 31#31: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "192.168.100.41:8080", referrer: "http://192.168.100.41:8080/"
+2021/07/26 08:27:14 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2021/07/26 08:27:14 [notice] 32#32: gracefully shutting down
+2021/07/26 08:27:14 [notice] 32#32: exiting
+2021/07/26 08:27:14 [notice] 31#31: gracefully shutting down
+2021/07/26 08:27:14 [notice] 32#32: exit
+2021/07/26 08:27:14 [notice] 31#31: exiting
+2021/07/26 08:27:14 [notice] 31#31: exit
+2021/07/26 08:27:14 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2021/07/26 08:27:14 [notice] 1#1: worker process 31 exited with code 0
+2021/07/26 08:27:14 [notice] 1#1: worker process 32 exited with code 0
+2021/07/26 08:27:14 [notice] 1#1: exit
+2021/07/26 08:27:20 [notice] 1#1: using the "epoll" event method
+2021/07/26 08:27:20 [notice] 1#1: nginx/1.21.1
+2021/07/26 08:27:20 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2021/07/26 08:27:20 [notice] 1#1: OS: Linux 4.18.0-240.10.1.el8_3.x86_64
+2021/07/26 08:27:20 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/26 08:27:20 [notice] 1#1: start worker processes
+2021/07/26 08:27:20 [notice] 1#1: start worker process 31
+2021/07/26 08:27:20 [notice] 1#1: start worker process 32
+2021/07/26 09:54:18 [error] 31#31: *3 open() "/usr/share/nginx/html/waleed" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /waleed HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 09:54:21 [error] 31#31: *3 open() "/usr/share/nginx/html/waleed" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /waleed HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 09:54:21 [error] 31#31: *3 open() "/usr/share/nginx/html/waleed" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /waleed HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 09:54:22 [error] 31#31: *3 open() "/usr/share/nginx/html/waleed" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /waleed HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 09:54:22 [error] 31#31: *3 open() "/usr/share/nginx/html/waleed" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /waleed HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 09:59:43 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2021/07/26 09:59:43 [notice] 31#31: gracefully shutting down
+2021/07/26 09:59:43 [notice] 32#32: gracefully shutting down
+2021/07/26 09:59:43 [notice] 31#31: exiting
+2021/07/26 09:59:43 [notice] 32#32: exiting
+2021/07/26 09:59:43 [notice] 31#31: exit
+2021/07/26 09:59:43 [notice] 32#32: exit
+2021/07/26 09:59:43 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2021/07/26 09:59:43 [notice] 1#1: worker process 32 exited with code 0
+2021/07/26 09:59:43 [notice] 1#1: signal 29 (SIGIO) received
+2021/07/26 09:59:43 [notice] 1#1: signal 17 (SIGCHLD) received from 31
+2021/07/26 09:59:43 [notice] 1#1: worker process 31 exited with code 0
+2021/07/26 09:59:43 [notice] 1#1: exit
+2021/07/26 10:01:36 [notice] 1#1: using the "epoll" event method
+2021/07/26 10:01:36 [notice] 1#1: nginx/1.21.1
+2021/07/26 10:01:36 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2021/07/26 10:01:36 [notice] 1#1: OS: Linux 4.18.0-240.10.1.el8_3.x86_64
+2021/07/26 10:01:36 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/26 10:01:36 [notice] 1#1: start worker processes
+2021/07/26 10:01:36 [notice] 1#1: start worker process 31
+2021/07/26 10:01:36 [notice] 1#1: start worker process 32
+2021/07/26 10:03:14 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2021/07/26 10:03:14 [notice] 32#32: gracefully shutting down
+2021/07/26 10:03:14 [notice] 32#32: exiting
+2021/07/26 10:03:14 [notice] 32#32: exit
+2021/07/26 10:03:14 [notice] 31#31: gracefully shutting down
+2021/07/26 10:03:14 [notice] 31#31: exiting
+2021/07/26 10:03:14 [notice] 31#31: exit
+2021/07/26 10:03:14 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2021/07/26 10:03:14 [notice] 1#1: worker process 32 exited with code 0
+2021/07/26 10:03:14 [notice] 1#1: signal 29 (SIGIO) received
+2021/07/26 10:03:14 [notice] 1#1: signal 17 (SIGCHLD) received from 31
+2021/07/26 10:03:14 [notice] 1#1: worker process 31 exited with code 0
+2021/07/26 10:03:14 [notice] 1#1: exit
+2021/07/26 10:03:19 [emerg] 1#1: open() "/etc/nginx/nginx.conf" failed (2: No such file or directory)
+2021/07/26 10:04:23 [notice] 1#1: using the "epoll" event method
+2021/07/26 10:04:23 [notice] 1#1: nginx/1.21.1
+2021/07/26 10:04:23 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2021/07/26 10:04:23 [notice] 1#1: OS: Linux 4.18.0-240.10.1.el8_3.x86_64
+2021/07/26 10:04:23 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/26 10:04:23 [notice] 1#1: start worker processes
+2021/07/26 10:04:23 [notice] 1#1: start worker process 30
+2021/07/26 10:04:23 [notice] 1#1: start worker process 31
+2021/07/26 10:06:53 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2021/07/26 10:06:53 [notice] 30#30: gracefully shutting down
+2021/07/26 10:06:53 [notice] 30#30: exiting
+2021/07/26 10:06:53 [notice] 30#30: exit
+2021/07/26 10:06:53 [notice] 31#31: gracefully shutting down
+2021/07/26 10:06:53 [notice] 31#31: exiting
+2021/07/26 10:06:53 [notice] 31#31: exit
+2021/07/26 10:06:54 [notice] 1#1: signal 17 (SIGCHLD) received from 30
+2021/07/26 10:06:54 [notice] 1#1: worker process 30 exited with code 0
+2021/07/26 10:06:54 [notice] 1#1: signal 29 (SIGIO) received
+2021/07/26 10:06:54 [notice] 1#1: signal 17 (SIGCHLD) received from 31
+2021/07/26 10:06:54 [notice] 1#1: worker process 31 exited with code 0
+2021/07/26 10:06:54 [notice] 1#1: exit
+2021/07/26 10:06:58 [emerg] 1#1: open() "/etc/nginx/nginx.conf" failed (2: No such file or directory)
+2021/07/26 10:07:47 [notice] 1#1: using the "epoll" event method
+2021/07/26 10:07:47 [notice] 1#1: nginx/1.21.1
+2021/07/26 10:07:47 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2021/07/26 10:07:47 [notice] 1#1: OS: Linux 4.18.0-240.10.1.el8_3.x86_64
+2021/07/26 10:07:47 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/26 10:07:47 [notice] 1#1: start worker processes
+2021/07/26 10:07:47 [notice] 1#1: start worker process 32
+2021/07/26 10:07:47 [notice] 1#1: start worker process 33
+2021/07/26 10:16:10 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2021/07/26 10:16:10 [notice] 32#32: gracefully shutting down
+2021/07/26 10:16:10 [notice] 32#32: exiting
+2021/07/26 10:16:10 [notice] 32#32: exit
+2021/07/26 10:16:10 [notice] 33#33: gracefully shutting down
+2021/07/26 10:16:10 [notice] 33#33: exiting
+2021/07/26 10:16:10 [notice] 33#33: exit
+2021/07/26 10:16:10 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2021/07/26 10:16:10 [notice] 1#1: worker process 32 exited with code 0
+2021/07/26 10:16:10 [notice] 1#1: signal 29 (SIGIO) received
+2021/07/26 10:16:10 [notice] 1#1: signal 17 (SIGCHLD) received from 33
+2021/07/26 10:16:10 [notice] 1#1: worker process 33 exited with code 0
+2021/07/26 10:16:10 [notice] 1#1: exit
+2021/07/26 10:16:17 [notice] 1#1: using the "epoll" event method
+2021/07/26 10:16:17 [notice] 1#1: nginx/1.21.1
+2021/07/26 10:16:17 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2021/07/26 10:16:17 [notice] 1#1: OS: Linux 4.18.0-240.10.1.el8_3.x86_64
+2021/07/26 10:16:17 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/26 10:16:17 [notice] 1#1: start worker processes
+2021/07/26 10:16:17 [notice] 1#1: start worker process 24
+2021/07/26 10:16:17 [notice] 1#1: start worker process 25
+2021/07/26 10:16:47 [error] 24#24: *1 open() "/usr/share/nginx/html/waleed" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /waleed HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 10:29:25 [error] 24#24: *4 open() "/usr/share/nginx/html/waleed" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /waleed HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 10:29:27 [error] 24#24: *4 open() "/usr/share/nginx/html/waleed" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /waleed HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 10:29:28 [error] 24#24: *4 open() "/usr/share/nginx/html/waleed" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /waleed HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 10:29:28 [error] 24#24: *4 open() "/usr/share/nginx/html/waleed" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /waleed HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 10:30:50 [error] 24#24: *5 open() "/usr/share/nginx/html/new" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /new HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 10:30:52 [error] 24#24: *5 open() "/usr/share/nginx/html/new" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /new HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 10:30:52 [error] 24#24: *5 open() "/usr/share/nginx/html/new" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /new HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 10:30:52 [error] 24#24: *5 open() "/usr/share/nginx/html/new" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /new HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 10:30:52 [error] 24#24: *5 open() "/usr/share/nginx/html/new" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /new HTTP/1.1", host: "192.168.100.41:8080"
+2021/07/26 10:32:27 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2021/07/26 10:32:27 [notice] 25#25: gracefully shutting down
+2021/07/26 10:32:27 [notice] 25#25: exiting
+2021/07/26 10:32:27 [notice] 24#24: gracefully shutting down
+2021/07/26 10:32:27 [notice] 24#24: exiting
+2021/07/26 10:32:27 [notice] 25#25: exit
+2021/07/26 10:32:27 [notice] 24#24: exit
+2021/07/26 10:32:27 [notice] 1#1: signal 17 (SIGCHLD) received from 25
+2021/07/26 10:32:27 [notice] 1#1: worker process 25 exited with code 0
+2021/07/26 10:32:27 [notice] 1#1: signal 29 (SIGIO) received
+2021/07/26 10:32:27 [notice] 1#1: signal 17 (SIGCHLD) received from 24
+2021/07/26 10:32:27 [notice] 1#1: worker process 24 exited with code 0
+2021/07/26 10:32:27 [notice] 1#1: exit
+2021/07/26 10:32:32 [notice] 1#1: using the "epoll" event method
+2021/07/26 10:32:32 [notice] 1#1: nginx/1.21.1
+2021/07/26 10:32:32 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2021/07/26 10:32:32 [notice] 1#1: OS: Linux 4.18.0-240.10.1.el8_3.x86_64
+2021/07/26 10:32:32 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/26 10:32:32 [notice] 1#1: start worker processes
+2021/07/26 10:32:32 [notice] 1#1: start worker process 24
+2021/07/26 10:32:32 [notice] 1#1: start worker process 25
+2021/07/26 10:35:13 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2021/07/26 10:35:13 [notice] 24#24: gracefully shutting down
+2021/07/26 10:35:13 [notice] 24#24: exiting
+2021/07/26 10:35:13 [notice] 24#24: exit
+2021/07/26 10:35:13 [notice] 25#25: gracefully shutting down
+2021/07/26 10:35:13 [notice] 25#25: exiting
+2021/07/26 10:35:13 [notice] 25#25: exit
+2021/07/26 10:35:13 [notice] 1#1: signal 17 (SIGCHLD) received from 24
+2021/07/26 10:35:13 [notice] 1#1: worker process 24 exited with code 0
+2021/07/26 10:35:13 [notice] 1#1: worker process 25 exited with code 0
+2021/07/26 10:35:13 [notice] 1#1: exit
+2021/07/26 10:35:18 [notice] 1#1: using the "epoll" event method
+2021/07/26 10:35:18 [notice] 1#1: nginx/1.21.1
+2021/07/26 10:35:18 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2021/07/26 10:35:18 [notice] 1#1: OS: Linux 4.18.0-240.10.1.el8_3.x86_64
+2021/07/26 10:35:18 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/26 10:35:18 [notice] 1#1: start worker processes
+2021/07/26 10:35:18 [notice] 1#1: start worker process 24
+2021/07/26 10:35:18 [notice] 1#1: start worker process 25
+2021/07/26 10:48:08 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2021/07/26 10:48:08 [notice] 24#24: gracefully shutting down
+2021/07/26 10:48:08 [notice] 24#24: exiting
+2021/07/26 10:48:08 [notice] 24#24: exit
+2021/07/26 10:48:08 [notice] 25#25: gracefully shutting down
+2021/07/26 10:48:08 [notice] 25#25: exiting
+2021/07/26 10:48:08 [notice] 25#25: exit
+2021/07/26 10:48:08 [notice] 1#1: signal 17 (SIGCHLD) received from 24
+2021/07/26 10:48:08 [notice] 1#1: worker process 24 exited with code 0
+2021/07/26 10:48:08 [notice] 1#1: signal 29 (SIGIO) received
+2021/07/26 10:48:08 [notice] 1#1: signal 17 (SIGCHLD) received from 25
+2021/07/26 10:48:08 [notice] 1#1: worker process 25 exited with code 0
+2021/07/26 10:48:08 [notice] 1#1: exit
+2021/07/26 10:50:21 [notice] 1#1: using the "epoll" event method
+2021/07/26 10:50:21 [notice] 1#1: nginx/1.21.1
+2021/07/26 10:50:21 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2021/07/26 10:50:21 [notice] 1#1: OS: Linux 4.18.0-240.10.1.el8_3.x86_64
+2021/07/26 10:50:21 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/26 10:50:21 [notice] 1#1: start worker processes
+2021/07/26 10:50:21 [notice] 1#1: start worker process 24
+2021/07/26 10:50:21 [notice] 1#1: start worker process 25
+2021/07/26 10:52:12 [error] 24#24: *1 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 192.168.100.24, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "192.168.100.47:8080", referrer: "http://192.168.100.47:8080/waleed"
+2021/07/26 10:53:59 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2021/07/26 10:53:59 [notice] 24#24: gracefully shutting down
+2021/07/26 10:53:59 [notice] 24#24: exiting
+2021/07/26 10:53:59 [notice] 24#24: exit
+2021/07/26 10:53:59 [notice] 25#25: gracefully shutting down
+2021/07/26 10:53:59 [notice] 25#25: exiting
+2021/07/26 10:53:59 [notice] 25#25: exit
+2021/07/26 10:53:59 [notice] 1#1: signal 17 (SIGCHLD) received from 24
+2021/07/26 10:53:59 [notice] 1#1: worker process 24 exited with code 0
+2021/07/26 10:53:59 [notice] 1#1: signal 29 (SIGIO) received
+2021/07/26 10:53:59 [notice] 1#1: signal 17 (SIGCHLD) received from 25
+2021/07/26 10:53:59 [notice] 1#1: worker process 25 exited with code 0
+2021/07/26 10:53:59 [notice] 1#1: exit
+2021/07/26 10:54:04 [notice] 1#1: using the "epoll" event method
+2021/07/26 10:54:04 [notice] 1#1: nginx/1.21.1
+2021/07/26 10:54:04 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6) 
+2021/07/26 10:54:04 [notice] 1#1: OS: Linux 4.18.0-240.10.1.el8_3.x86_64
+2021/07/26 10:54:04 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/07/26 10:54:04 [notice] 1#1: start worker processes
+2021/07/26 10:54:04 [notice] 1#1: start worker process 24
+2021/07/26 10:54:04 [notice] 1#1: start worker process 25

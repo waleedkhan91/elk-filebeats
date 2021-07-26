@@ -4,6 +4,7 @@ services:
     image: nginx
     volumes:
       - ./nginx/logs:/var/log/nginx/
+      - ./nginx/conf:/etc/nginx/
     ports:
       - "8080:80"
     networks:
