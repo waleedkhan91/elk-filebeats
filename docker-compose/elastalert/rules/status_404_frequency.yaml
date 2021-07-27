@@ -54,4 +54,4 @@ alert:
 - "slack"
 slack:
 # The <"https://xxxxx.slack.com/services/new/incoming-webhook"> webhook URL that includes your auth data and the ID of the channel (room) you want to post to.
-slack_webhook_url: "https://hooks.slack.com/services/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"
+slack_webhook_url: "<enter slack url here>"
