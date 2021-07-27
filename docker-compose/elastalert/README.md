@@ -41,9 +41,10 @@ docker pull alpine:latest && docker pull node:latest
 docker build -t elastalert .
 ```
 
-## docker-compose is create to simply up the container with relevant settings
-
-```docker-compose up -d
+## docker-compose is created to simply up the container with relevant settings
+```
+docker-compose up -d
+```
 
 ### Options
 
