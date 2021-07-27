@@ -1,0 +1,33 @@
+version: '3.2'
+
+services:
+  elastalert:
+    image: bitsensor/elastalert:3.0.0-beta.1
+    volumes:
+      - type: bind
+        source: ./config/elastalert.yaml
+        target: /opt/elastalert/config.yaml
+        read_only: true
+      - type: bind
+        source: ./config/elastalert-test.yaml
+        target: /opt/elastalert/config-test.yaml
+        read_only: true
+      - type: bind
+        source: ./config/config.json
+        target: /opt/elastalert-server/config/config.json
+        read_only: true
+      - type: bind
+        source: ./rules
+        target: /opt/elastalert/rules
+        read_only: true
+      - type: bind
+        source: ./rule_templates
+        target: /opt/elastalert/rule_templates
+        read_only: true
+    ports:
+      - "3030:3030"
+    networks:
+      - host
+networks:
+  host:
+    driver: bridge

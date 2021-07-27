@@ -1,0 +1,58 @@
+# Alert when the rate of events exceeds a threshold
+
+# (Optional)
+# Elasticsearch host
+# es_host: elasticsearch.example.com
+
+# (Optional)
+# Elasticsearch port
+# es_port: 14900
+
+# (Required)
+# Index to search, wildcard supported
+index: nginx-*
+
+# (OptionaL) Connect with SSL to Elasticsearch
+#use_ssl: True
+
+# (Optional) basic-auth username and password for Elasticsearch
+#es_username: someusername
+#es_password: somepassword
+
+# (Required)
+# Rule name, must be unique
+name: url cardinality rule
+
+# (Required)
+# Type of alert.
+# the frequency rule type alerts when num_events events occur with timeframe time
+type: cardinality
+
+# (Required, cardinality specific)
+# Count the number of unique values for this field
+cardinality_field: "url"
+
+# (Required, frequency specific)
+# Alert when there less than 15 unique hostnames
+min_cardinality: 4
+
+# (Required, frequency specific)
+# The cardinality is defined as the number of unique values for the most recent 4 hours
+timeframe:
+  minutes: 5
+
+# (Required)
+# A list of Elasticsearch filters used for find events
+# These filters are joined with AND and nested in a filtered query
+# For more info: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
+filter:
+- term:
+    http_method: "GET"
+
+# (Required)
+# The alert is use when a match is found
+alert:
+- "slack"
+slack:
+# The <"https://xxxxx.slack.com/services/new/incoming-webhook"> webhook URL that includes your auth data and the ID of the channel (room) you want to post to.
+slack_webhook_url: "https://hooks.slack.com/services/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"

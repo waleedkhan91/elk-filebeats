@@ -1,0 +1,20 @@
+name: "Heartbeat flatline Alert for url"
+type: flatline
+index: "nginx-*"
+
+threshold: 100
+
+timeframe:
+  minutes: 10
+
+query_delay:
+  minutes: 2
+
+realert:
+  minutes: 5
+
+alert:
+- "slack"
+slack:
+# The <"https://xxxxx.slack.com/services/new/incoming-webhook"> webhook URL that includes your auth data and the ID of the channel (room) you want to post to.
+slack_webhook_url: "https://hooks.slack.com/services/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"
