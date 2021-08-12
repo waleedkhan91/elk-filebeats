@@ -48,10 +48,6 @@ realert:
 # These filters are joined with AND and nested in a filtered query
 # For more info: http://www.elasticsearch.org/guidei/en/elasticsearch/reference/current/query-dsl.html
 filter:
-#- term:
- #   status: "404"
-#- terms:
- #   url: ["hamid", "zunera"]
 - query:
     query_string:
        query: "(status: 404 AND url: url1) OR (status: 404 AND url: url2) OR (status: 404 AND url: url3)"
@@ -65,7 +61,7 @@ alert_text_args:
 - num_hits
 - num_matches
 - url
-include: ["@timestamp", "status", "url"]
+
 
 # (Required)
 # The alert is use when a match is found
