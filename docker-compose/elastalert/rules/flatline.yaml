@@ -13,6 +13,12 @@ query_delay:
 realert:
   minutes: 5
 
+alert_subject: "Heartbeat Flatline Alert"
+alert_text: "Flatline alert for nginx having count {0}"
+alert_text_type: alert_text_only
+alert_text_args:
+- count
+
 alert:
 - "slack"
 slack:
