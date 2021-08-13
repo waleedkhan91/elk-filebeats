@@ -55,11 +55,10 @@ query_key:
   - url
   - status
 alert_subject: "API 404 Status Alert"
-alert_text: "Total {0} hits recieved with {1} errors in last 3 minutes for api {2}"
+alert_text: "Total {0} 404-errors in last 3 minutes for api {1}"
 alert_text_type: alert_text_only
 alert_text_args:
 - num_hits
-- num_matches
 - url
 
 
