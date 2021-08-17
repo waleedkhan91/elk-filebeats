@@ -1,0 +1,215 @@
+# Alert when the rate of events exceeds a threshold
+
+# (Optional)
+# Elasticsearch host
+# es_host: elasticsearch.example.com
+
+# (Optional)
+# Elasticsearch port
+# es_port: 14900
+
+# (OptionaL) Connect with SSL to Elasticsearch
+#use_ssl: True
+
+# (Optional) basic-auth username and password for Elasticsearch
+#es_username: someusername
+#es_password: somepassword
+#doc_type: "nginx_logs"
+## (Required)
+# Rule name, must be unique
+name: MTA-APIs-STATUS-ALERT
+#use_terms_query: true
+# (Required)
+# Type of alert.
+# the frequency rule type alerts when num_events events occur with timeframe time
+type: frequency
+#use_count_query: true
+
+# (Required)
+# Index to search, wildcard supported
+index: nginx-rp*
+
+# (Required, frequency specific)
+# Alert when this many documents matching the query occur within a timeframe
+num_events: 200
+
+# (Required, frequency specific)
+# num_events must occur within this amount of time to trigger an alert
+timeframe:
+  minutes: 15
+#run_every:
+ # minutes: 3
+realert:
+  minutes: 15
+
+# (Required)
+# A list of Elasticsearch filters used for find events
+# These filters are joined with AND and nested in a filtered query
+# For more info: http://www.elasticsearch.org/guidei/en/elasticsearch/reference/current/query-dsl.html
+filter:
+- query:
+    query_string:
+       query: "(status: 404 AND url: api\\/customer\\/balance)
+            OR (status: 404 AND url: waver\\/init)
+            OR (status: 404 AND url: waver\\/finalise)
+            OR (status: 404 AND url: recharge\\/sink)
+            OR (status: 404 AND url: recharge\\/bonus\\/claim\\/)
+            OR (status: 404 AND url: recharge\\/bonus\\/check\\/)
+            OR (status: 404 AND url: offers-streak\\/update\\/streaks\\/set\\/expired)
+            OR (status: 404 AND url: offers-streak\\/streak\\/init)
+            OR (status: 404 AND url: offers-streak\\/offers\\/offer\\/details)
+            OR (status: 404 AND url: offers-streak\\/offers\\/list\\/favourite\\/)
+            OR (status: 404 AND url: offers-streak\\/offers\\/list\\/)
+            OR (status: 404 AND url: offers-streak\\/offer\\/favourite)
+            OR (status: 404 AND url: offers-streak\\/ep-ipn)
+            OR (status: 404 AND url: offers-campaigns\\/offers\\/exclusive\\/guest\\/advanced)
+            OR (status: 404 AND url: offers-campaigns\\/offers\\/exclusive\\/basic\\/)
+            OR (status: 404 AND url: offers-campaigns\\/offers\\/exclusive\\/advanced\\/)
+            OR (status: 404 AND url: offers-campaigns\\/offer\\/advanced\\/activation)
+            OR (status: 404 AND url: offers-campaigns\\/event\\/writeback)
+            OR (status: 404 AND url: offers-campaigns\\/ep-ipn)
+            OR (status: 404 AND url: offers-campaigns\\/catalog\\/last_updates_process)
+            OR (status: 404 AND url: offer\\/activate\\/cbs)
+            OR (status: 404 AND url: job\\/flexibundles\\/delete\\/poller)
+            OR (status: 404 AND url: job\\/flexibundles\\/activation\\/poller)
+            OR (status: 404 AND url: internal\\/recharge\\/triggers\\/v1)
+            OR (status: 404 AND url: internal\\/offer\\/activation\\/triggers\\/v1)
+            OR (status: 404 AND url: flexiplan\\/order\\/status\\/inprogress\\/)
+            OR (status: 404 AND url: enhance_creditlimit\\/init)
+            OR (status: 404 AND url: api\\/sim\\/3g4gcheck\\/)
+            OR (status: 404 AND url: api\\/reporting\\/widgetclick\\/)
+            OR (status: 404 AND url: api\\/reporting\\/rtdmreject\\/)
+            OR (status: 404 AND url: api\\/reporting\\/openevent\\/)
+            OR (status: 404 AND url: api\\/order\\/sim\\/searchtrackernumbers\\/)
+            OR (status: 404 AND url: api\\/order\\/sim\\/search\\/byn\\/)
+            OR (status: 404 AND url: api\\/offers\\/list\\/v3\\/)
+            OR (status: 404 AND url: api\\/offers-campaigns\\/offers\\/exclusive\\/advanced\\/)
+            OR (status: 404 AND url: api\\/migration\\/pretopost\\/finalise\\/)
+            OR (status: 404 AND url: api\\/migration\\/pretopost\\/create\\/)
+            OR (status: 404 AND url: api\\/info\\/connect)
+            OR (status: 404 AND url: api\\/guest\\/order\\/finalise\\/)
+            OR (status: 404 AND url: api\\/guest\\/offer\\/)
+            OR (status: 404 AND url: api\\/guest\\/custombundle\\/activate\\/)
+            OR (status: 404 AND url: api\\/flexiplan\\/order\\/status\\/inprogress\\/)
+            OR (status: 404 AND url: api\\/flexiplan\\/order\\/pretoflexi\\/init\\/)
+            OR (status: 404 AND url: api\\/flexiplan\\/order\\/finalise\\/)
+            OR (status: 404 AND url: api\\/flexiplan\\/form\\/new\\/)
+            OR (status: 404 AND url: api\\/flexiplan\\/form\\/existing\\/)
+            OR (status: 404 AND url: api\\/flexiplan\\/allowance\\/combinations\\/details\\/)
+            OR (status: 404 AND url: api\\/firebase\\/device\\/)
+            OR (status: 404 AND url: api\\/feedback\\/config)
+            OR (status: 404 AND url: api\\/explore-v2\\/weather\\/getCityWeather)
+            OR (status: 404 AND url: api\\/explore-v2\\/news\\/latest)
+            OR (status: 404 AND url: api\\/explore-v2\\/favorites)
+            OR (status: 404 AND url: api\\/explore-v2\\/config\\/app)
+            OR (status: 404 AND url: api\\/easypaisa\\/recharge\\/)
+            OR (status: 404 AND url: api\\/easypaisa\\/ma\\/deduct)
+            OR (status: 404 AND url: api\\/easypaisa\\/ipn\\/receiver)
+            OR (status: 404 AND url: api\\/customer\\/usage\\/updatedlimits\\/)
+            OR (status: 404 AND url: api\\/customer\\/usage\\/history\\/)
+            OR (status: 404 AND url: api\\/customer\\/sms\\/records)
+            OR (status: 404 AND url: api\\/customer\\/shop\\/myorders\\/)
+            OR (status: 404 AND url: api\\/customer\\/services-portfolio\\/)
+            OR (status: 404 AND url: api\\/customer\\/rechargehistory)
+            OR (status: 404 AND url: api\\/customer\\/recharge\\/cc-transaction\\/initiate)
+            OR (status: 404 AND url: api\\/customer\\/recharge\\/cc-transaction\\/finalise)
+            OR (status: 404 AND url: api\\/connect\\/logout\\/)
+            OR (status: 404 AND url: api\\/bundle-share\\/order\\/)
+            OR (status: 404 AND url: api\\/balance-share\\/share\\/)
+            OR (status: 404 AND url: api\\/balance-share\\/config\\/)
+            OR (status: 404 AND url: api\\/app\\/offer\\/offers-detail)
+            OR (status: 404 AND url: api\\/app\\/offer\\/)
+            OR (status: 404 AND url: api\\/customer\\/order\\/finalise\\/)
+            OR (status: 404 AND url: api\\/customer\\/internetsettings\\/)
+            OR (status: 404 AND url: api\\/customer\\/digitalservice\\/)
+            OR (status: 404 AND url: api\\/customer\\/shop\\/orders\\/new\\/)
+            OR (status: 404 AND url: api\\/easypaisa\\/cc\\/validate)
+            OR (status: 404 AND url: api\\/guest\\/digitalservice\\/)
+            OR (status: 404 AND url: api\\/web\\/config\\/app\\/explore\\/)
+            OR (status: 404 AND url: offer\\/activationFeedback\\/)
+            OR (status: 404 AND url: api\\/crowdsourcing\\/map\\/pin\\/status\\/open\\/deny)
+            OR (status: 404 AND url: api\\/crowdsourcing\\/map\\/pin\\/status\\/open\\/confirm)
+            OR (status: 404 AND url: api\\/crowdsourcing\\/map\\/pin\\/add)
+            OR (status: 404 AND url: offer\\/fetch\\/)
+            OR (status: 404 AND url: api\\/customer\\/postpaid\\/billing\\/enhacecreditlimit\\/easypaisa\\/cc\\/transaction\\/initiate\\/)
+            OR (status: 404 AND url: enhance_creditlimit\\/init)
+            OR (status: 404 AND url: enhance_creditlimit\\/finalise)
+            OR (status: 404 AND url: customer\\/info)
+            OR (status: 404 AND url: conversion\\/init)
+            OR (status: 404 AND url: conversion\\/finalise)
+            OR (status: 404 AND url: bundle-share\\/order)
+            OR (status: 404 AND url: api\\/web\\/uiconfig\\/usage)
+            OR (status: 404 AND url: api\\/web\\/uiconfig\\/ecare\\/ui)
+            OR (status: 404 AND url: api\\/web\\/uiconfig\\/complaints\\/forms)
+            OR (status: 404 AND url: api\\/web\\/ui\\/custombundles\\/form)
+            OR (status: 404 AND url: api\\/web\\/shop\\/products)
+            OR (status: 404 AND url: api\\/web\\/shop\\/offers\\/listing\\/widget)
+            OR (status: 404 AND url: api\\/web\\/shop\\/coupon\\/status)
+            OR (status: 404 AND url: api\\/web\\/services\\/update\\/time)
+            OR (status: 404 AND url: api\\/web\\/quickamounts\\/creditlimit)
+            OR (status: 404 AND url: api\\/web\\/uiconfig\\/complaints\\/forms)
+            OR (status: 404 AND url: api\\/web\\/quickamounts)
+            OR (status: 404 AND url: api\\/web\\/packageplans-prepaid)
+            OR (status: 404 AND url: api\\/web\\/packageplans-postpaid)
+            OR (status: 404 AND url: api\\/web\\/offers\\/top)
+            OR (status: 404 AND url: api\\/web\\/offers\\/list)
+            OR (status: 404 AND url: api\\/web\\/homebanner\\/config)
+            OR (status: 404 AND url: api\\/web\\/guest\\/homebanner\\/config)
+            OR (status: 404 AND url: api\\/web\\/digitalservices)
+            OR (status: 404 AND url: api\\/web\\/custombundle\\/getprice)
+            OR (status: 404 AND url: api\\/web\\/content\\/terms-conditions)
+            OR (status: 404 AND url: api\\/web\\/content\\/privacy-policy)api\\/web\\/content\\/privacy-policy" }
+            OR (status: 404 AND url: api\\/web\\/content\\/license)api\\/web\\/content\\/license" }
+            OR (status: 404 AND url: api\\/web\\/contactinfo)api\\/web\\/contactinfo" }
+            OR (status: 404 AND url: api\\/web\\/config\\/pretopostpaidmigration)
+            OR (status: 404 AND url: api\\/web\\/config\\/app\\/promotions)
+            OR (status: 404 AND url: api\\/web\\/app\\/recommendations)
+            OR (status: 404 AND url: api\\/v3\\/customer\\/usage\\/limits)
+            OR (status: 404 AND url: api\\/v2\\/myob\\/custom-bundle\\/getprice)
+            OR (status: 404 AND url: api\\/v2\\/myob\\/custom-bundle\\/config)
+            OR (status: 404 AND url: api\\/v2\\/myob\\/custom-bundle\\/activate)
+            OR (status: 404 AND url: api\\/v2\\/customer\\/usage\\/limits)
+            OR (status: 404 AND url: api\\/v2\\/customer\\/info)
+            OR (status: 404 AND url: api\\/token\\/sign)
+            OR (status: 404 AND url: api\\/streak\\/info)
+            OR (status: 404 AND url: api\\/streak\\/claim)
+            OR (status: 404 AND url: api\\/sports\\/offer\\/trivia\\/questions)
+            OR (status: 404 AND url: api\\/customer\\/pushlogin)
+            OR (status: 404 AND url: api\\/customer\\/priceplanmigration)
+            OR (status: 404 AND url: api\\/customer\\/postpaid\\/billing\\/invoice)
+            OR (status: 404 AND url: api\\/customer\\/postpaid\\/billing\\/enhacecreditlimit\\/easypaisa\\/ma)
+            OR (status: 404 AND url: api\\/customer\\/pinpuk)
+            OR (status: 404 AND url: api\\/customer\\/paymenthistory)
+            OR (status: 404 AND url: api\\/customer\\/offers\\/suggest)
+            OR (status: 404 AND url: api\\/v2\\/customer\\/usage\\/limits)
+            OR (status: 404 AND url: api\\/customer\\/offers\\/saved)
+            OR (status: 404 AND url: api\\/customer\\/offers\\/byactivity)
+            OR (status: 404 AND url: api\\/customer\\/offer\\/)
+            OR (status: 404 AND url: api\\/customer\\/mobile\\/ls-bundles-portfolio)
+            OR (status: 404 AND url: api\\/customer\\/loan)
+            OR (status: 404 AND url: api\\/customer\\/fnf)
+            OR (status: 404 AND url: api\\/customer\\/feedback)
+            OR (status: 404 AND url: api\\/customer\\/data\\/records)
+            OR (status: 404 AND url: api\\/customer\\/data\\/mobile\\/records)
+            OR (status: 404 AND url: api\\/customer\\/custombundle\\/activate)
+            OR (status: 404 AND url: api\\/customer\\/complaint)
+            OR (status: 404 AND url: api\\/v2\\/customer\\/usage\\/limits)
+            OR (status: 404 AND url: api\\/customer\\/cardrecharge)
+            OR (status: 404 AND url: api\\/customer\\/call\\/records)"
+query_key:
+  - url
+  - status
+alert_subject: "APIs STATUS ALERT"
+alert_text: "Total {0} errors for url {1} in last 15 minutes"
+alert_text_type: alert_text_only
+alert_text_args:
+- num_hits
+- url
+
+# (Required)
+# The alert is use when a match is found
+alert:
+- "slack"
+slack:
+# The <"https://xxxxx.slack.com/services/new/incoming-webhook"> webhook URL that includes your auth data and the ID of the channel (room) you want to post to.
+slack_webhook_url: "https://hooks.slack.com/services/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"

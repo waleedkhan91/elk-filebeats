@@ -1,0 +1,26 @@
+name: "Requests Index HeartBeat Alert"
+type: flatline
+index: "requests_*"
+
+threshold: 100
+
+timeframe:
+  minutes: 15
+
+query_delay:
+  minutes: 2
+
+realert:
+  minutes: 15
+
+alert_subject: "Requests Index HeartBeat Alert"
+alert_text: "Flatline alert for requests having count {0}"
+alert_text_type: alert_text_only
+alert_text_args:
+- count
+
+alert:
+- "slack"
+slack:
+# The <"https://xxxxx.slack.com/services/new/incoming-webhook"> webhook URL that includes your auth data and the ID of the channel (room) you want to post to.
+slack_webhook_url: "<enter slack url here>"
